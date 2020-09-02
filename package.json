@@ -1,0 +1,19 @@
+{
+  "name": "weather-app",
+  "scripts": {
+    "dev": "nuxt --port 3000",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "start": "nuxt start"
+  },
+  "dependencies": {
+    "@mdi/font": "^5.5.55",
+    "@nuxtjs/axios": "^5.12.2",
+    "axios": "^0.20.0",
+    "nuxt": "^2.14.4",
+    "vuetify": "^2.3.10"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.11.2"
+  }
+}
