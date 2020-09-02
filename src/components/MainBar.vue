@@ -30,12 +30,21 @@
 </template>
 
 <script>
+    import weatherApi from '../api/weatherApi'
+
 
     export default {
         name: "mainBar",
         methods:{
-            updateWeather(){
-                console.log("Something done...")
+            async updateWeather(){
+
+                weatherApi.updateWeatherByCityName(this.cityName)
+                    .then(response =>{
+                        console.log(response)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
             },
             addCity(){
                 console.log(this.cityName);
