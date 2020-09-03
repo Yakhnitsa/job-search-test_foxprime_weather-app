@@ -1,6 +1,6 @@
 const API_KEY='29314bfb91473cf56c499c71455aa652';
 const axios = require('axios');
-const url = 'http://api.openweathermap.org/data/2.5/weather';
+const url = 'https://api.openweathermap.org/data/2.5/weather';
 
 export default {
     async updateWeatherByCityName(cityName){
