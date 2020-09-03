@@ -42,3 +42,5 @@
 
  - Подключение и запуск проекта [nuxt.js](https://ru.nuxtjs.org/guides/get-started/installation)
  - Установка [vuetify](https://vuetifyjs.com/en/getting-started/quick-start/#nuxt-install)
+ - Подключение [nuxt-vuex-localstorage](https://www.npmjs.com/package/nuxt-vuex-localstorage)
+ - Работа с [vuex-store](https://ru.nuxtjs.org/guide/vuex-store/)
