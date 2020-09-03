@@ -44,3 +44,5 @@
  - Установка [vuetify](https://vuetifyjs.com/en/getting-started/quick-start/#nuxt-install)
  - Подключение [nuxt-vuex-localstorage](https://www.npmjs.com/package/nuxt-vuex-localstorage)
  - Работа с [vuex-store](https://ru.nuxtjs.org/guide/vuex-store/)
+ - Публикация на heroku, [node.js tutor](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
+ - Публикация на heroku для nuxt.js [tutor](https://ru.nuxtjs.org/faq/heroku-deployment/)

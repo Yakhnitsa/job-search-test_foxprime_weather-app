@@ -4,7 +4,8 @@
     "dev": "nuxt --port 3000",
     "build": "nuxt build",
     "generate": "nuxt generate",
-    "start": "nuxt start"
+    "start": "nuxt start",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@mdi/font": "^5.5.55",
