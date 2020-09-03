@@ -24,14 +24,15 @@
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>
             </v-toolbar>
-
+            <v-btn @click="addCity">Add city</v-btn>
+            <v-btn @click="deleteCity">Delete city</v-btn>
+            <v-btn @click="clearStorage">Clear storage</v-btn>
         </v-container>
     </v-main>
 </template>
 
 <script>
     import weatherApi from '../api/weatherApi'
-
 
     export default {
         name: "mainBar",
@@ -47,12 +48,21 @@
                     });
             },
             addCity(){
-                console.log(this.cityName);
+                this.city = {id: 2643743, name: "London" };
+                this.$store.commit('localStorage/addCity',this.city)
+            },
+
+            deleteCity(){
+                this.city = {id: 2643743, name: "London" };
+                this.$store.commit('localStorage/deleteCity',this.city)
+            },
+            clearStorage(){
+                this.$store.commit('localStorage/clearCityStorage')
             }
         },
         data(){
             return{
-                formValid: false,
+                weatherData:undefined,
                 city: undefined,
                 cityName:'',
                 cityRules:[

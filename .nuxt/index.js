@@ -14,6 +14,7 @@ import { createStore } from './store.js'
 /* Plugins */
 
 import nuxt_plugin_plugin_2f9bcb9b from 'nuxt_plugin_plugin_2f9bcb9b' // Source: .\\vuetify\\plugin.js (mode: 'all')
+import nuxt_plugin_nuxtvuexlocalstorage_7346523b from 'nuxt_plugin_nuxtvuexlocalstorage_7346523b' // Source: .\\nuxt-vuex-localstorage.js (mode: 'client')
 import nuxt_plugin_axios_fca246c8 from 'nuxt_plugin_axios_fca246c8' // Source: .\\axios.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -198,6 +199,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_plugin_2f9bcb9b === 'function') {
     await nuxt_plugin_plugin_2f9bcb9b(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_nuxtvuexlocalstorage_7346523b === 'function') {
+    await nuxt_plugin_nuxtvuexlocalstorage_7346523b(app.context, inject)
   }
 
   if (typeof nuxt_plugin_axios_fca246c8 === 'function') {

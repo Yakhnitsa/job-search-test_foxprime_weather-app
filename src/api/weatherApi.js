@@ -11,6 +11,15 @@ export default {
 
         return await axios.get(url,{params})
     },
+
+    async updateWeatherByCityId(cityId){
+        const params = {
+            appid : API_KEY,
+            id: cityId
+        };
+
+        return await axios.get(url,{params})
+    },
 }
 //
 // function loadWeatherByCityId(cityId){

@@ -4,11 +4,15 @@
 
         <!---->
         <v-app>
+            <v-navigation-drawer v-model="drawer" app>
+                <cities-bar></cities-bar>
+            </v-navigation-drawer>
             <v-app-bar app>
-                My weather application
+                <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             </v-app-bar>
 
-            <main-bar>Something wrong with it</main-bar>
+            <main-bar></main-bar>
+
 
             <v-footer app>
 
@@ -20,10 +24,18 @@
 </template>
 <script>
     import MainBar from '../components/MainBar.vue'
+    import CitiesBar from "../components/CitiesBar.vue";
 
     export default {
         components: {
+            CitiesBar,
             MainBar
         },
+        data(){
+            return {
+                drawer: true,
+            }
+        }
+
     }
 </script>

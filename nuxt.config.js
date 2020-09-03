@@ -9,6 +9,7 @@ export default {
 
     modules: [
         '@nuxtjs/axios',
+        'nuxt-vuex-localstorage'
     ],
 
     axios: {
@@ -24,11 +25,7 @@ export default {
 }
 
 module.exports = {
-    build: {
-        vendor: ['axios']
-    },
-
-    // plugins:[
-    //     '@plugins/vuetify'
-    // ],
-};
+    modules: [
+        'nuxt-vuex-localstorage'
+    ]
+}
