@@ -1,0 +1,9 @@
+###node js
+node_modules
+.nuxt
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
