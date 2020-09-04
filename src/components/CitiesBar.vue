@@ -46,9 +46,7 @@
                     this.$store.commit('mainStorage/setCurrentCity',city);
                     this.updateWeatherByCityId(city.id);
                 }
-
             },
-
 
         },
         methods:{

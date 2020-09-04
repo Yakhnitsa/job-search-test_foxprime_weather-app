@@ -12,7 +12,6 @@ export const mutations = {
 
     deleteCity(state,city){
         const index = state.cities.findIndex(item => item.id === city.id );
-        console.log(index);
         state.cities.splice(index,1);
     },
 

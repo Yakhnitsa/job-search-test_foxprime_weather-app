@@ -30,11 +30,10 @@
             </v-btn>
 
             <weather-info
-                    v-bind:weatherData="weatherData"
-
-            >
-
+                    v-bind:city="currentCity"
+                    v-bind:weatherData="weatherData">
             </weather-info>
+
         </v-container>
     </v-main>
 </template>
@@ -86,7 +85,7 @@
                         lat: responseData.coord.lat
                     }
                 };
-                this.$store.commit('rootStorage/setCurrentCity',city)
+                this.$store.commit('mainStorage/setCurrentCity',city)
             },
 
             updateWeatherData(response){
@@ -98,20 +97,8 @@
                     clouds : response.data.clouds,
                     sys : response.data.sys,
                 };
-                this.$store.commit('rootStorage/setCurrentWeather',weater)
-
+                this.$store.commit('mainStorage/setCurrentWeather',weater)
             },
-            clearCity(){
-                this.city = {
-                    name:'',
-                    id:'',
-                    country:'',
-                    coord:{
-                        lon:'',
-                        lat:''
-                    }
-                }
-            }
 
         },
         data(){
@@ -132,10 +119,10 @@
 
             },
             weatherData(){
-                return this.$store.state.rootStorage.currentWeather;
+                return this.$store.state.mainStorage.currentWeather;
             },
             currentCity(){
-                return this.$store.state.rootStorage.currentCity;
+                return this.$store.state.mainStorage.currentCity;
             },
         }
 

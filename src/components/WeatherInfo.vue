@@ -1,5 +1,7 @@
 <template>
     <div>
+        <h4>Погода в регионе</h4>
+        <p>{{city}}</p>
         <span>{{weatherData.weather}}</span>
         <span>{{weatherData.main}}</span>
         <span>{{weatherData.wind}}</span>
@@ -12,6 +14,20 @@
     export default {
         name: "WeatherInfo",
         props: {
+            city:{
+                type: Object,
+                default: function(){
+                    return {
+                        name: 'No name',
+                        id: 'No id',
+                        country: 'XX',
+                        coord: {
+                            lon: 1,
+                            lat: 1
+                        }
+                    }
+                }
+            },
             weatherData:{
                 type: Object,
                 default: function () {
@@ -99,6 +115,7 @@
             //     }
             // }
         },
+
         created(){
 
         }
