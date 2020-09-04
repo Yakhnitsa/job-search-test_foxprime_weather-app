@@ -3,6 +3,7 @@ import weatherApi from '../api/weatherApi'
 export const state = () => ({
     currentCity: undefined,
     currentWeather: undefined,
+    errorMessage:'',
     testData:''
 });
 
@@ -17,6 +18,12 @@ export const mutations = {
 
     setTestMutation(state,value){
         state.testData = value
+    },
+    clearError(state){
+        state.errorMessage = ''
+    },
+    setErrorMessage(state,message){
+        state.errorMessage = message
     }
 
 };
@@ -39,6 +46,7 @@ export const actions = {
             }
         }catch(error){
             console.log(error);
+            commit('setErrorMessage',"Не удалось обновить погоду для региона: id=" + cityId);
         }
     },
     async updateWeatherByCityName({commit,state},cityName){
@@ -47,10 +55,14 @@ export const actions = {
             if(response.status === 200){
                 const data = await response.data;
                 const weather = getWeatherFromResponseData(data);
+                const city = getCityFromResponseData(data)
                 commit('setCurrentWeather',weather)
+                commit('setCurrentCity',city)
+
             }
         }catch(error){
             console.log(error);
+            commit('setErrorMessage','Не удалось обновить погоду для региона: name=' + cityName);
         }
     },
 };

@@ -18,17 +18,22 @@
                     <v-icon>mdi-magnify</v-icon>
                 </v-btn>
 
-                <v-btn
-
-                        :disabled="!isCityValid"
-                        @click="addCity" icon>
-                    <v-icon>mdi-plus</v-icon>
-                </v-btn>
+                <v-tooltip bottom open-delay="200" >
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                                v-on="on"
+                                :disabled="!addCityEnabled"
+                                @click="addCity" icon>
+                            <v-icon>mdi-plus</v-icon>
+                        </v-btn>
+                    </template>
+                    <span>Добавить город</span>
+                </v-tooltip>
             </v-toolbar>
 
-            <v-btn @click="test">
-                Test button
-            </v-btn>
+            <!--<v-btn @click="test">-->
+                <!--Test button-->
+            <!--</v-btn>-->
 
             <weather-info
                     v-bind:city="currentCity"
@@ -40,23 +45,14 @@
 </template>
 
 <script>
-    import weatherApi from '../api/weatherApi'
     import WeatherInfo from "../components/WeatherInfo.vue";
 
     export default {
         name: "mainBar",
         components: {WeatherInfo},
         methods:{
-            async updateWeather(){
-
-                weatherApi.updateWeatherByCityName(this.cityName)
-                    .then(response =>{
-                        this.updateWeatherData(response)
-                        this.updateCity(response.data)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    });
+            updateWeather(){
+                this.$store.dispatch('mainStorage/updateWeatherByCityName',this.cityName);
             },
             addCity(){
                 if(this.isCityValid){
@@ -113,7 +109,7 @@
             }
         },
         computed: {
-            isCityValid(){
+            addCityEnabled(){
                 if(this.currentCity === undefined) return false;
                 return this.currentCity.id;
             },

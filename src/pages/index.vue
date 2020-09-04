@@ -4,9 +4,7 @@
 
         <!---->
         <v-app>
-            <v-navigation-drawer v-model="drawer" app>
-                <cities-bar></cities-bar>
-            </v-navigation-drawer>
+
             <v-app-bar
                     src="https://i.picsum.photos/id/1056/3988/2720.jpg?hmac=qX6hO_75zxeYI7C-1TOspJ0_bRDbYInBwYeoy_z_h08"
                     elevation="3"
@@ -36,6 +34,9 @@
 
 
             </v-app-bar>
+            <v-navigation-drawer v-model="drawer" app>
+                <cities-bar></cities-bar>
+            </v-navigation-drawer>
 
             <main-bar></main-bar>
 
@@ -56,7 +57,7 @@
                     <v-btn
                             color="red"
                             icon
-                            @click="hasErrors = false">
+                            @click="closeError">
                         <v-icon large>mdi-close-circle-outline</v-icon>
                     </v-btn>
                 </template>
@@ -90,16 +91,17 @@
             citiesCount(){
                 return this.$store.state.localStorage.cities.length;
             },
-            hasErrors:{
-                get(){
-                    return true;
-                },
-                set(value){
-                    console.log(value);
-                }
+            hasErrors(){
+                return this.$store.state.mainStorage.errorMessage;
+
             },
             errorText(){
-                return 'Не удалось выполнить запрос';
+                return this.$store.state.mainStorage.errorMessage;
+            }
+        },
+        methods:{
+            closeError(){
+                this.$store.commit('mainStorage/clearError')
             }
         }
 

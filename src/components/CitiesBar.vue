@@ -1,6 +1,13 @@
 <template>
-    <div>
-        <h1>Сохраненные города</h1>
+    <v-card>
+        <v-toolbar
+                color="teal"
+                src="https://i.picsum.photos/id/1056/3988/2720.jpg?hmac=qX6hO_75zxeYI7C-1TOspJ0_bRDbYInBwYeoy_z_h08"
+                dark
+        >
+
+            <v-toolbar-title>Сохраненные города</v-toolbar-title>
+        </v-toolbar>
         <v-list flat>
             <v-list-item-group v-model="currentCity">
                 <v-list-item v-for="(city, i) in cities"
@@ -23,7 +30,7 @@
             </v-list-item-group>
         </v-list>
 
-    </div>
+    </v-card>
 </template>
 
 <script>
