@@ -19,6 +19,7 @@
                 </v-btn>
 
                 <v-btn
+
                         :disabled="!isCityValid"
                         @click="addCity" icon>
                     <v-icon>mdi-plus</v-icon>
@@ -114,9 +115,7 @@
         computed: {
             isCityValid(){
                 if(this.currentCity === undefined) return false;
-
                 return this.currentCity.id;
-
             },
             weatherData(){
                 return this.$store.state.mainStorage.currentWeather;

@@ -27,13 +27,14 @@
                         <v-btn icon
                                elevation="1"
                                 href="https://github.com/Yakhnitsa/job-search-test_foxprime_weather-app" target="_blank"
-                                v-bind="attrs"
                                 v-on="on">
                             <v-icon large>mdi-github</v-icon>
                         </v-btn>
                     </template>
                     <span>Открыть проект на Github</span>
                 </v-tooltip>
+
+
             </v-app-bar>
 
             <main-bar></main-bar>
@@ -42,6 +43,30 @@
             <v-footer app>
 
             </v-footer>
+            <v-snackbar
+                    :timeout="-1"
+                    :value="hasErrors"
+                    absolute
+                    centered
+                    color="danger"
+                    elevation="10"
+                    rounded="3">
+                {{errorText}}
+                <template v-slot:action="{ attrs }">
+                    <v-btn
+                            color="red"
+                            icon
+                            @click="hasErrors = false">
+                        <v-icon large>mdi-close-circle-outline</v-icon>
+                    </v-btn>
+                </template>
+                <!--<v-btn-->
+                        <!--color="red"-->
+                        <!--icon-->
+                        <!--@click="hasErrors = false">-->
+                    <!--<v-icon large>mdi-close-circle-outline</v-icon>-->
+                <!--</v-btn>-->
+            </v-snackbar>
         </v-app>
     </div>
 
@@ -64,6 +89,17 @@
         computed:{
             citiesCount(){
                 return this.$store.state.localStorage.cities.length;
+            },
+            hasErrors:{
+                get(){
+                    return true;
+                },
+                set(value){
+                    console.log(value);
+                }
+            },
+            errorText(){
+                return 'Не удалось выполнить запрос';
             }
         }
 
