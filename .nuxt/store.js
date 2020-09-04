@@ -17,16 +17,18 @@ let store = {};
   // Enforce store modules
   store.modules = store.modules || {}
 
-  resolveStoreModules(require('..\\src\\store\\cityStore.js'), 'cityStore.js')
   resolveStoreModules(require('..\\src\\store\\localStorage.js'), 'localStorage.js')
+  resolveStoreModules(require('..\\src\\store\\mainStorage.js'), 'mainStorage.js')
+  resolveStoreModules(require('..\\src\\store\\rootStorage.js'), 'rootStorage.js')
 
   // If the environment supports hot reloading...
 
   if (process.client && module.hot) {
     // Whenever any Vuex module is updated...
     module.hot.accept([
-      '..\\src\\store\\cityStore.js',
       '..\\src\\store\\localStorage.js',
+      '..\\src\\store\\mainStorage.js',
+      '..\\src\\store\\rootStorage.js',
     ], () => {
       // Update `root.modules` with the latest definitions.
       updateModules()

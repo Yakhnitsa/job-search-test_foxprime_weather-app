@@ -24,15 +24,13 @@
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>
             </v-toolbar>
-            <v-btn @click="addCity">Add city</v-btn>
-            <v-btn @click="deleteCity">Delete city</v-btn>
-            <v-btn @click="clearStorage">Clear storage</v-btn>
+
+            <v-btn @click="test">
+                Test button
+            </v-btn>
+
             <weather-info
-                    v-bind:weather="weatherData.weather"
-                    :main="weatherData.main"
-                    :wind="weatherData.wind"
-                    :clouds="weatherData.clouds"
-                    :sys="weatherData.sys"
+                    v-bind:weatherData="weatherData"
 
             >
 
@@ -63,8 +61,7 @@
             addCity(){
                 if(this.isCityValid){
 
-                    this.$store.commit('localStorage/addCity',this.city)
-                    this.clearCity();
+                    this.$store.commit('localStorage/addCity',this.currentCity);
                     this.cityName = '';
                 }
 
@@ -76,8 +73,11 @@
             clearStorage(){
                 this.$store.commit('localStorage/clearCityStorage')
             },
+            test(){
+                this.$store.dispatch('mainStorage/simpleAction','some value')
+            },
             updateCity(responseData){
-                this.city = {
+                const city = {
                     name: responseData.name,
                     id: responseData.id,
                     country: responseData.sys.country,
@@ -85,15 +85,21 @@
                         lon: responseData.coord.lon,
                         lat: responseData.coord.lat
                     }
-                }
+                };
+                this.$store.commit('rootStorage/setCurrentCity',city)
             },
+
             updateWeatherData(response){
-                this.weatherData.dt = response.data.dt
-                this.weatherData.weather = response.data.weather[0]
-                this.weatherData.main = response.data.main
-                this.weatherData.wind = response.data.wind
-                this.weatherData.clouds = response.data.clouds
-                this.weatherData.sys = response.data.sys
+                const weater = {
+                    dt : response.data.dt,
+                    weather : response.data.weather[0],
+                    main : response.data.main,
+                    wind : response.data.wind,
+                    clouds : response.data.clouds,
+                    sys : response.data.sys,
+                };
+                this.$store.commit('rootStorage/setCurrentWeather',weater)
+
             },
             clearCity(){
                 this.city = {
@@ -110,23 +116,6 @@
         },
         data(){
             return{
-                weatherData:{
-                    dt:0,
-                    weather: undefined,
-                    main: undefined,
-                    wind: undefined,
-                    clouds: undefined,
-                    sys: undefined,
-                },
-                city: {
-                    name:'',
-                    id:'',
-                    country:'',
-                    coord:{
-                        lon:'',
-                        lat:''
-                    }
-                },
                 cityName:'',
                 cityRules:[
                     v => !!v || 'City is required',
@@ -137,15 +126,17 @@
         },
         computed: {
             isCityValid(){
-                if(this.city === undefined) return false;
+                if(this.currentCity === undefined) return false;
 
-                return this.city.id;
+                return this.currentCity.id;
 
             },
-            trueValue(){
-                return true;
-            }
-
+            weatherData(){
+                return this.$store.state.rootStorage.currentWeather;
+            },
+            currentCity(){
+                return this.$store.state.rootStorage.currentCity;
+            },
         }
 
     }

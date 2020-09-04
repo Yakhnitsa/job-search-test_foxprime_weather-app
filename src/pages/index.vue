@@ -8,7 +8,15 @@
                 <cities-bar></cities-bar>
             </v-navigation-drawer>
             <v-app-bar app>
-                <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+                <v-app-bar-nav-icon @click.stop="drawer = !drawer">
+                    <v-badge
+                            color="green"
+                            :content="citiesCount"
+                            :value="citiesCount"
+                    >
+                        <v-icon>mdi-city</v-icon>
+                    </v-badge>
+                </v-app-bar-nav-icon>
             </v-app-bar>
 
             <main-bar></main-bar>
@@ -34,6 +42,11 @@
         data(){
             return {
                 drawer: true,
+            }
+        },
+        computed:{
+            citiesCount(){
+                return this.$store.state.localStorage.cities.length;
             }
         }
 
