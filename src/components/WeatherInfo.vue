@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card ma-2>
         <!--<h4>Погода в регионе</h4>-->
         <!--<p>{{city}}</p>-->
         <!--<span>{{weatherData.weather}}</span>-->
@@ -26,9 +26,9 @@
                     </v-col>
                     <v-col cols="6">
                         <v-img
-                                src="https://cdn.vuetifyjs.com/images/cards/sun.png"
+                                :src="weatherIconRef"
                                 alt="Sunny image"
-                                width="92"
+
                         ></v-img>
                     </v-col>
                 </v-row>
@@ -108,7 +108,7 @@
                         weather:{
                             main: 'no-data',
                             description: 'no-data',
-                            icon: '?'
+                            icon: '02d'
                         },
                         main:{
                             temp: 0.0,
@@ -186,6 +186,13 @@
             //         }
             //     }
             // }
+        },
+        computed:{
+            weatherIconRef(){
+                const iconCode = this.weatherData.weather.icon;
+
+                return 'http://openweathermap.org/img/wn/' + iconCode + '@4x.png';
+            }
         },
 
         created(){
