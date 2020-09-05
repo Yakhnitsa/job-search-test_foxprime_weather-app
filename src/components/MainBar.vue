@@ -1,7 +1,7 @@
 <template>
     <v-main>
 
-        <!-- Provides the application the proper gutter -->
+
         <v-container fluid>
             <v-toolbar
                     dense
@@ -30,11 +30,6 @@
                     <span>Добавить город</span>
                 </v-tooltip>
             </v-toolbar>
-
-            <!--<v-btn @click="test">-->
-                <!--Test button-->
-            <!--</v-btn>-->
-
             <weather-info
                     v-bind:city="currentCity"
                     v-bind:weatherData="weatherData">
@@ -62,40 +57,6 @@
 
             },
 
-            deleteCity(){
-                this.$store.commit('localStorage/deleteCity',this.city)
-            },
-            clearStorage(){
-                this.$store.commit('localStorage/clearCityStorage')
-            },
-            test(){
-                this.$store.dispatch('mainStorage/simpleAction','some value')
-            },
-            updateCity(responseData){
-                const city = {
-                    name: responseData.name,
-                    id: responseData.id,
-                    country: responseData.sys.country,
-                    coord: {
-                        lon: responseData.coord.lon,
-                        lat: responseData.coord.lat
-                    }
-                };
-                this.$store.commit('mainStorage/setCurrentCity',city)
-            },
-
-            updateWeatherData(response){
-                const weater = {
-                    dt : response.data.dt,
-                    weather : response.data.weather[0],
-                    main : response.data.main,
-                    wind : response.data.wind,
-                    clouds : response.data.clouds,
-                    sys : response.data.sys,
-                };
-                this.$store.commit('mainStorage/setCurrentWeather',weater)
-            },
-
         },
         data(){
             return{
@@ -110,7 +71,10 @@
         computed: {
             addCityEnabled(){
                 if(this.currentCity === undefined) return false;
-                return this.currentCity.id;
+                return this.storedCities.findIndex(city => city.id === this.currentCity.id) === -1;
+            },
+            storedCities(){
+                return this.$store.state.localStorage.cities;
             },
             weatherData(){
                 return this.$store.state.mainStorage.currentWeather;

@@ -1,15 +1,14 @@
 <template>
     <v-card
-            class="ma-3"
-            max-width="500"
-    >
+            class="my-1"
+            max-width="500">
         <v-list-item two-line>
             <v-list-item-content>
                 <v-list-item-title class="headline">Погода в регионе: {{city.name}}, {{city.country}}
                 </v-list-item-title>
-                <v-list-item-subtitle>
-                    {{dateAndTime | formatDate}} , {{weatherData.weather.description}}
-                </v-list-item-subtitle>
+                <v-list-item-title class="headline text--secondary">
+                    {{dateAndTime | formatDate}}
+                </v-list-item-title>
             </v-list-item-content>
         </v-list-item>
         <v-row align="center">
@@ -51,9 +50,12 @@
                 <v-col cols="5">
                     <v-img
                             :src="weatherIconRef"
-                            alt="Sunny image"
+                            alt="Sunny image">
 
-                    ></v-img>
+                        <div align="center" class="subheading">{{weatherData.weather.description}}</div>
+
+
+                    </v-img>
                 </v-col>
             </v-row>
         </v-card-text>
@@ -62,16 +64,16 @@
             <v-col>
                 <v-list-item>
                     <v-list-item-icon>
-                        <v-icon>mdi-send</v-icon>
+                        <v-icon>mdi-weather-windy</v-icon>
                     </v-list-item-icon>
-                    <v-list-item-subtitle>{{weatherData.wind.speed}} km/h</v-list-item-subtitle>
+                    <v-list-item-subtitle>верер: {{weatherData.wind.speed}} km/h</v-list-item-subtitle>
                 </v-list-item>
 
                 <v-list-item>
                     <v-list-item-icon>
                         <v-icon>mdi-soundcloud</v-icon>
                     </v-list-item-icon>
-                    <v-list-item-subtitle>{{weatherData.clouds.all}}%</v-list-item-subtitle>
+                    <v-list-item-subtitle>облачность: {{weatherData.clouds.all}}%</v-list-item-subtitle>
                 </v-list-item>
             </v-col>
             <v-col>
@@ -79,14 +81,14 @@
                     <v-list-item-icon>
                         <v-icon>mdi-gauge</v-icon>
                     </v-list-item-icon>
-                    <v-list-item-subtitle>{{weatherData.main.pressure}} Bar</v-list-item-subtitle>
+                    <v-list-item-subtitle>давление: {{weatherData.main.pressure}} Bar</v-list-item-subtitle>
                 </v-list-item>
 
                 <v-list-item>
                     <v-list-item-icon>
                         <v-icon>mdi-water-percent</v-icon>
                     </v-list-item-icon>
-                    <v-list-item-subtitle>{{weatherData.main.humidity}}%</v-list-item-subtitle>
+                    <v-list-item-subtitle>влажность: {{weatherData.main.humidity}}%</v-list-item-subtitle>
                 </v-list-item>
             </v-col>
         </v-row>
@@ -119,7 +121,7 @@
                 type: Object,
                 default: function () {
                     return {
-                        dt: '',
+                        dt: undefined,
                         weather: {
                             main: 'no-data',
                             description: 'no-data',
@@ -131,21 +133,21 @@
                             temp_min: 0.0,
                             temp_max: 0.0,
                             pressure: 1000,
-                            humidity: 50
+                            humidity: 0
                         },
                         wind: {
                             speed: 0.0,
                             deg: 0
                         },
                         clouds: {
-                            all: 43,
+                            all: 0,
                         },
                         sys: {
-                            country: "USA",
-                            sunrise: 1599023726,
-                            sunset: 1599072313
+                            country: "??",
+                            sunrise: undefined,
+                            sunset: undefined
                         },
-                        timezone: 0
+                        timezone: undefined
 
                     }
                 }
@@ -156,7 +158,6 @@
         computed: {
             weatherIconRef() {
                 const iconCode = this.weatherData.weather.icon;
-
                 return 'http://openweathermap.org/img/wn/' + iconCode + '@4x.png';
             },
             sunriseTime() {

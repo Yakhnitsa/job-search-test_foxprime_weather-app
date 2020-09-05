@@ -21,19 +21,4 @@ export default {
         return await axios.get(url,{params})
     },
 }
-//
-// function loadWeatherByCityId(cityId){
-//     const params = {
-//         appid : API_KEY,
-//         id: cityId
-//     };
-//     return this.$axios.get(url,{params});
-// }
-//
-// function loadWeatherByCityName(cityName){
-//     const params = {
-//         appid : API_KEY,
-//         q: cityName
-//     };
-//     return this.$axios.get('',{params});
-// }
+

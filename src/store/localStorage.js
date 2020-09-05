@@ -19,4 +19,4 @@ export const mutations = {
         state.cities = []
     }
 
-}
+};

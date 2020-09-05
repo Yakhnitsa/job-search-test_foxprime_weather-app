@@ -16,13 +16,7 @@ export default {
         'nuxt-vuex-localstorage'
     ],
 
-    axios: {
-        // extra config e.g
-        // BaseURL: 'https://link-to-API'
-    },
-
     buildModules: [
-        // Simple usage
         '@nuxtjs/vuetify',
     ]
 
@@ -32,7 +26,4 @@ module.exports = {
     modules: [
         'nuxt-vuex-localstorage'
     ],
-    plugins: [
-        '~plugins/filters.js'
-    ]
 }

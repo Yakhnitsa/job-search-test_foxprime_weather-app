@@ -1,8 +1,6 @@
 <template>
     <div>
 
-
-        <!---->
         <v-app>
 
             <v-app-bar
@@ -20,12 +18,12 @@
                 </v-app-bar-nav-icon>
                 <v-toolbar-title>Simple weather application</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-tooltip left open-delay="200" >
+                <v-tooltip left open-delay="200">
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn icon
                                elevation="1"
-                                href="https://github.com/Yakhnitsa/job-search-test_foxprime_weather-app" target="_blank"
-                                v-on="on">
+                               href="https://github.com/Yakhnitsa/job-search-test_foxprime_weather-app" target="_blank"
+                               v-on="on">
                             <v-icon large>mdi-github</v-icon>
                         </v-btn>
                     </template>
@@ -61,12 +59,7 @@
                         <v-icon large>mdi-close-circle-outline</v-icon>
                     </v-btn>
                 </template>
-                <!--<v-btn-->
-                        <!--color="red"-->
-                        <!--icon-->
-                        <!--@click="hasErrors = false">-->
-                    <!--<v-icon large>mdi-close-circle-outline</v-icon>-->
-                <!--</v-btn>-->
+
             </v-snackbar>
         </v-app>
     </div>
@@ -82,28 +75,26 @@
             CitiesBar,
             MainBar
         },
-        data(){
+        data() {
             return {
                 drawer: true,
             }
         },
-        computed:{
-            citiesCount(){
+        computed: {
+            citiesCount() {
                 return this.$store.state.localStorage.cities.length;
             },
-            hasErrors(){
+            hasErrors() {
                 return this.$store.state.mainStorage.errorMessage;
-
             },
-            errorText(){
+            errorText() {
                 return this.$store.state.mainStorage.errorMessage;
             }
         },
-        methods:{
-            closeError(){
+        methods: {
+            closeError() {
                 this.$store.commit('mainStorage/clearError')
             }
         }
-
     }
 </script>
