@@ -55,8 +55,7 @@
                 this.$store.dispatch('mainStorage/updateWeatherByCityName',this.cityName);
             },
             addCity(){
-                if(this.isCityValid){
-
+                if(this.currentCity){
                     this.$store.commit('localStorage/addCity',this.currentCity);
                     this.cityName = '';
                 }

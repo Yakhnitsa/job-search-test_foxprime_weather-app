@@ -31,5 +31,8 @@ export default {
 module.exports = {
     modules: [
         'nuxt-vuex-localstorage'
+    ],
+    plugins: [
+        '~plugins/filters.js'
     ]
 }

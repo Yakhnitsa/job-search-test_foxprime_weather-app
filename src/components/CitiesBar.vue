@@ -8,26 +8,51 @@
 
             <v-toolbar-title>Сохраненные города</v-toolbar-title>
         </v-toolbar>
-        <v-list flat>
-            <v-list-item-group v-model="currentCity">
-                <v-list-item v-for="(city, i) in cities"
-                             :key="i"
-                             :value="city"
-                >
-                    <v-list-item-icon>
-                        <v-icon>
-                            mdi-map-marker
-                        </v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                        <v-list-item-title v-text="city.name"></v-list-item-title>
-                    </v-list-item-content>
-                    <v-btn icon fab
-                           @click="deleteCity(city)">
-                        <v-icon>mdi-close-circle</v-icon>
+        <!--<v-list flat>-->
+        <!--<v-list-item-group v-model="currentCity">-->
+        <!--<v-list-item v-for="(city, i) in cities"-->
+        <!--:key="i"-->
+        <!--:value="city"-->
+        <!--&gt;-->
+        <!--<v-list-item-icon>-->
+        <!--<v-icon>-->
+        <!--mdi-map-marker-->
+        <!--</v-icon>-->
+        <!--</v-list-item-icon>-->
+        <!--<v-list-item-content>-->
+        <!--<v-list-item-title v-text="city.name"></v-list-item-title>-->
+        <!--</v-list-item-content>-->
+        <!--<v-btn icon fab-->
+        <!--@click="deleteCity(city)">-->
+        <!--<v-icon>mdi-close-circle</v-icon>-->
+        <!--</v-btn>-->
+        <!--</v-list-item>-->
+        <!--</v-list-item-group>-->
+        <!--</v-list>-->
+
+
+        <v-list two-line>
+            <v-list-item
+                    v-for="city in cities"
+                    :key="city.id"
+                    @click="setCurrentCityAndUpdateWeather(city)"
+            >
+                <v-list-item-avatar>
+                    <v-icon>mdi-map-marker</v-icon>
+                </v-list-item-avatar>
+
+                <v-list-item-content>
+                    <v-list-item-title v-text="city.name"></v-list-item-title>
+                    <v-list-item-subtitle v-text="city.country"></v-list-item-subtitle>
+                </v-list-item-content>
+
+                <v-list-item-action @click.stop="deleteCity(city)">
+                    <v-btn icon>
+                        <v-icon color="grey lighten-1">mdi-close-circle</v-icon>
                     </v-btn>
-                </v-list-item>
-            </v-list-item-group>
+                </v-list-item-action>
+            </v-list-item>
+
         </v-list>
 
     </v-card>
@@ -37,34 +62,27 @@
     export default {
         name: "CitiesBar",
         data() {
-            return{
-                index:''
+            return {
+                index: ''
             }
         },
-        computed:{
-            cities(){
+        computed: {
+            cities() {
                 return this.$store.state.localStorage.cities;
             },
-            currentCity:{
-                get: function () {
-                    return this.$store.state.mainStorage.currentCity;
-                },
-                set: function (city) {
-                    this.$store.commit('mainStorage/setCurrentCity',city);
-                    this.updateWeatherByCityId(city.id);
-                }
+            currentCity() {
+                return this.$store.state.mainStorage.currentCity;
             },
 
         },
-        methods:{
-            updateWeatherByCityId(cityId){
-                this.$store.dispatch('mainStorage/updateWeatherByCityId',cityId);
+        methods: {
+            setCurrentCityAndUpdateWeather(city) {
+                this.$store.commit('mainStorage/setCurrentCity', city);
+                this.$store.dispatch('mainStorage/updateWeatherByCityId', city.id);
             },
-            deleteCity(city){
-                this.city = undefined;
-                this.$store.commit('localStorage/deleteCity',city)
+            deleteCity(city) {
+                this.$store.commit('localStorage/deleteCity', city)
             },
-
         }
     }
 </script>

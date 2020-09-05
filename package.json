@@ -11,6 +11,7 @@
     "@mdi/font": "^5.5.55",
     "@nuxtjs/axios": "^5.12.2",
     "axios": "^0.20.0",
+    "dateformat": "^3.0.3",
     "nuxt": "^2.14.4",
     "nuxt-vuex-localstorage": "^1.2.7",
     "vuetify": "^2.3.10"

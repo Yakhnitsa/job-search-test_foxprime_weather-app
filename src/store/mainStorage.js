@@ -87,5 +87,6 @@ function getWeatherFromResponseData(responseData){
         wind : responseData.wind,
         clouds : responseData.clouds,
         sys : responseData.sys,
+        timezone: responseData.timezone
     }
 }
