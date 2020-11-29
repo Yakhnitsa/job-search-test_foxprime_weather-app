@@ -52,3 +52,6 @@
  - Работа с [vuex-store](https://ru.nuxtjs.org/guide/vuex-store/)
  - Публикация на heroku, [node.js tutor](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
  - Публикация на heroku для nuxt.js [tutor](https://ru.nuxtjs.org/faq/heroku-deployment/)
+ - Установка и использование json server (https://code.tutsplus.com/ru/tutorials/fake-rest-api-up-and-running-using-json-server--cms-27871)
+ - Весь список городов [openweathermap cities](http://bulk.openweathermap.org/sample/city.list.json.gz)
+ - 
