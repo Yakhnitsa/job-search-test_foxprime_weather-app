@@ -10,7 +10,7 @@ export const state = () => ({
 });
 
 export const mutations = {
-    setCurrentCity(state,city){
+    setCurrentCityMutation(state,city){
         state.currentCity = city
     },
 
@@ -34,14 +34,10 @@ export const mutations = {
 };
 
 export const actions = {
-    simpleAction({commit,state},data){
-        console.log("simple action");
-        commit('setTestMutation', data)
-    },
 
     async updateWeatherByCityId({commit,state},cityId){
         try{
-            const response = await weatherApi.updateWeatherByCityId(cityId)
+            const response = await weatherApi.updateWeatherByCityId(cityId);
             if(response.status === 200){
                 const data = await response.data;
                 const weather = getWeatherFromResponseData(data);
