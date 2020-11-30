@@ -23,7 +23,7 @@
                         clearable
                         prepend-icon="mdi-domain"
                         label="Поиск города"></v-autocomplete>
-                <v-btn @click="updateWeatherByCityName" icon>
+                <v-btn @click="updateWeather" icon>
                     <v-icon>mdi-magnify</v-icon>
                 </v-btn>
 
@@ -83,27 +83,29 @@
                 if(this.currentCity === undefined) return false;
                 return this.storedCities.findIndex(city => city.id === this.currentCity.id) === -1;
             },
-            // storedCities(){
-            //     return this.$store.state.localStorage.cities;
-            // },
-            // weatherData(){
-            //     return this.$store.state.mainStorage.currentWeather;
-            // },
+            storedCities(){
+                return this.$store.state.localStorage.cities;
+            },
+            weatherData(){
+                return this.$store.state.mainStorage.currentWeather;
+            },
             currentCity: {
                 get(){
                     return this.$store.state.mainStorage.currentCity;
                 },
                 set(val){
                     this.setCurrentCity(val);
+                    if(val !== undefined) this.updateWeatherByCityId(val.id);
+
                 }
             },
         },
         methods:{
 
-            ...mapState({
-                storedCities: 'localStorage/cities',
-                weatherData: 'mainStorage/currentWeather'
-            }),
+            // ...mapState({
+            //     storedCities: 'localStorage/cities',
+            //     // weatherData: 'mainStorage/currentWeather'
+            // }),
             ...mapActions({
                 updateWeatherByCityName: 'mainStorage/updateWeatherByCityName',
                 updateWeatherByCityId: 'mainStorage/updateWeatherByCityId'
@@ -115,12 +117,16 @@
 
             addCity(){
                 if(this.currentCity){
-                    this.addCityToStorage(this.currentCity());
+                    this.addCityToStorage(this.currentCity);
                     this.citySearch = null;
                 }
             },
             updateWeather(){
-
+                if(this.currentCity){
+                    this.updateWeatherByCityId(this.currentCity.id);
+                }else{
+                    this.updateWeatherByCityName(this.citySearch);
+                }
             }
             // ...mapActions({
             //     findCity: 'mainStorage/searchForCitiesAction'

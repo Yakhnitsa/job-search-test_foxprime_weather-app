@@ -57,7 +57,7 @@
         },
         methods: {
             setCurrentCityAndUpdateWeather(city) {
-                this.$store.commit('mainStorage/setCurrentCity', city);
+                this.$store.commit('mainStorage/setCurrentCityMutation', city);
                 this.$store.dispatch('mainStorage/updateWeatherByCityId', city.id);
             },
             deleteCity(city) {
